@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="filter-box">
+    <p-messages *ngIf="alertMessage" [(value)]="alertMessage" [enableService]="false" [closable]="true" />
+    <p-dropdown [options]="options.currencies" (onChange)="currencyChanged($event)" class="dropdown">
+    </p-dropdown>
+    <p-dropdown [options]="options.coins" (onChange)="coinsChanged($event)" class="dropdown">
+    </p-dropdown>
+    <p-inputNumber type="number" (focusout)="focusOut($event)" placeholder="Number of Days"></p-inputNumber>
+  </div>
+  <div *ngIf="chartData$ | async as data">
+    <p-chart type="line" [data]="data" [options]="options.chartOptions" class="chart"></p-chart>
+  </div>
+  <div class="date-range-buttons">
+    <button (click)="setDateRange(1)" [ngClass]="getClass(1)">1D</button>
+    <button (click)="setDateRange(7)" [ngClass]="getClass(7)">7D</button>
+    <button (click)="setDateRange(30)" [ngClass]="getClass(30)">1M</button>
+    <button (click)="setDateRange(365)" [ngClass]="getClass(365)">1Y</button>
+  </div>
+</div>
